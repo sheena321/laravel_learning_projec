@@ -9,7 +9,8 @@ class formCController extends Controller
 {
     public function show_form()
     {
-        $customers=Customer::all();
+        // $customers=Customer::all()->paginate;
+        $customers = Customer::query()->paginate(10);
         return view('customer.sign_in',compact('customers'));
     }
 

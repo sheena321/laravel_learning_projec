@@ -48,6 +48,10 @@
           <td><a href="{{route('customer.delete', $customer->id)}}"><button class="btn btn-danger">Delete</button></a></td>
         </tr>
       @endforeach
+      <div>
+      {{$customers->links()}}
+    </div>
     @endunless
     @endsection
+    
    
