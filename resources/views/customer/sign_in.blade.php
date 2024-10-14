@@ -3,8 +3,18 @@
   @section('content')
 <form action="{{isset($edit) ? route('customer.update', $customer->id) : route('customer.create')}}" method="post">
     @csrf
-    
-  <div class="form-row">
+      <!-- <div>{{session()->get('username')}}</div>   /**like this we can get value from session in blade[ username set in controller] */ -->
+
+
+      @if(session()->has('success')) 
+      <div>
+        {{session()->get('success')}}   /* {{session('success')}} also works */
+       </div>
+       @endif
+
+
+       
+     <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputEmail4">Email</label>
       <input type="email" class="form-control" id="email" name="email" value="{{isset($edit) ? $customer->email : ''}}">

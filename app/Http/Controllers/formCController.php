@@ -9,9 +9,12 @@ class formCController extends Controller
 {
     public function show_form()
     {
-        // $customers=Customer::all()->paginate;
+        
+        // session()->put('username','Ramu');  /**like this we can assign value to session**/
         $customers = Customer::query()->paginate(10);
+        
         return view('customer.sign_in',compact('customers'));
+        // return session()->get('username');    /**like this we can get value from session**/
     }
 
     public function customercreate(Request $request){
@@ -27,7 +30,16 @@ class formCController extends Controller
         $customer->address2 = $request->get('add1');
         // dd($customer);
         $customer->save();
-        return redirect()->route('customer.signin')->with('success', 'Record created successfully.');
+        session()->forget('username'); /**like this we can remove/delete value from session */
+        session()->flush(); /**like this we can remove/delete all values from session */
+
+        return redirect()->route('customer.signin')->with('success', 'Record created successfully.'); 
+         /**with and flash messages are same  
+          * with('success', 'Record created successfully.');
+          * flash('success', 'Record created successfully.');
+          * session()->flash('success', 'Record created successfully.');
+          we can call it in blade 
+           */
     }
     public function customeredit($id){
         $customer = Customer::find($id);
