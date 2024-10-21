@@ -23,3 +23,6 @@ Route::post('sign-in-save',[App\Http\Controllers\formCController::class, 'custom
 Route::get('customer/edit/{id}',[App\Http\Controllers\formCController::class, 'customeredit'])->name('customer.edit');
 Route::get('customer/delete/{id}',[App\Http\Controllers\formCController::class, 'customerdelete'])->name('customer.delete');
 Route::post('customer/update/{id}',[App\Http\Controllers\formCController::class, 'customerupdate'])->name('customer.update');
+Route::get('logIn', [App\Http\Controllers\loginController::class, 'login'])->name('login');
+Route::post('loginUser',[App\Http\controllers\loginController::class,'logingUser'])->name('loginUser');
+Route::get('logout', [App\Http\Controllers\loginController::class, 'logout'])->name('logout');

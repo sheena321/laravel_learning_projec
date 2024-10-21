@@ -62,6 +62,7 @@
       {{$customers->links()}}
     </div>
     @endunless
-    @endsection
+   
+    <a href="{{route('login')}}"><button class="btn btn-primary">logout</button"></a>
     
    
