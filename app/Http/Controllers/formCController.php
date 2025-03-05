@@ -12,6 +12,8 @@ class formCController extends Controller
         
         // session()->put('username','Ramu');  /**like this we can assign value to session**/
         $customers = Customer::query()->paginate(10);
+        session()->put('usrid',5);
+        session()->increment('usrid',3);
         
         return view('customer.sign_in',compact('customers'));
         // return session()->get('username');    /**like this we can get value from session**/
@@ -42,9 +44,29 @@ class formCController extends Controller
            */
     }
     public function customeredit($id){
+
         $customer = Customer::find($id);
         $edit = true;
         return view('customer.sign_in',compact('customer','edit'));
+
+        /**** below code showing checking of ser login without using middleware *****/ 
+
+        // if(Auth()->check()){
+        //     $customer = Customer::find($id);
+        //     $edit = true;
+        //     return view('customer.sign_in',compact('customer','edit'));
+        // }else{
+        //         return redirect()->route('login')->with('error', 'Login details are not valid');
+        
+        //     }
+
+
+        /* using midelware
+         1)create a middleware php artisan command(crated  'ChedUserLoggedIn' middleware)
+         2)Auth::check() inside the handle function of middlware
+         3)register middelware in kernal with name
+
+        */
     }
     public function customerupdate(Request $request, $id)
     {

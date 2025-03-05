@@ -3,14 +3,15 @@
   @section('content')
 <form action="{{isset($edit) ? route('customer.update', $customer->id) : route('customer.create')}}" method="post">
     @csrf
-      <!-- <div>{{session()->get('username')}}</div>   /**like this we can get value from session in blade[ username set in controller] */ -->
-
+      <div>{{session()->get('username')}}</div>   /**like this we can get value from session in blade[ username set in controller] */
+      <div>{{session()->get('usrid')}}</div>
 
       @if(session()->has('success')) 
       <div>
         {{session()->get('success')}}   /* {{session('success')}} also works */
        </div>
        @endif
+       <h2>welcome{{auth()->user()->name?? ''}}</h2>
 
 
        
@@ -58,11 +59,14 @@
           <td><a href="{{route('customer.delete', $customer->id)}}"><button class="btn btn-danger">Delete</button></a></td>
         </tr>
       @endforeach
-      <div>
-      {{$customers->links()}}
-    </div>
+     
     @endunless
+  </tbody>
+      @if(!isset($edit))
+      {{$customers->links()}}
+      @endif
+    </div>
    
-    <a href="{{route('login')}}"><button class="btn btn-primary">logout</button"></a>
+    <a href="{{route('logout')}}"><button class="btn btn-primary">Logout</button></a>
     
    
