@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\UserAddress;
 
 class User extends Authenticatable
 {
@@ -32,6 +33,15 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function address(){
+        return $this->hasOne(UserAddress::class, 'user_id', 'id');
+    }
+
+    public function comments(){
+    return $this->hasMany(UserComment::class, 'user_id', 'id');
+    }
+    
 
     /**
      * The attributes that should be cast.

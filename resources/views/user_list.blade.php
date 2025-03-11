@@ -20,6 +20,8 @@
             <td>{{$user->password}}</td>
             <td>
                 <a href="{{ route('profile', $user->id) }}$user->id}}" class="btn btn-primary">Edit</a>
+                <a href="{{ route('userAddresslist', $user->id)}}" class="btn btn-primary">view address</a>
+                <a href="{{route('userComments', $user->id)}}" class="btn btn-danger">Comments</a>
                 <!-- <a href="{{url('/userlist/delete/'.$user->id)}}" class="btn btn-danger">Delete</a> -->
             </td>
         </tr>

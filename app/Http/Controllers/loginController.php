@@ -20,8 +20,9 @@ class loginController extends Controller
         ]);        
         $credentials = $request->only('email', 'password');
         // $customer=Customer::where('email','kesu@kk.com')->first();
+        // info($customer);
         // info($credentials);
-        // info(Auth::attempt($credentials));
+   
         // info([
         //     'Entered Password' => $request->password,
         //     'Hashed Password in DB' => $customer->password,
@@ -52,5 +53,17 @@ class loginController extends Controller
     public function userlist(Request $request){
         $users = User::all();
         return view('user_list', compact('users'));
+    }
+
+    public function userAddressList($id){
+
+        $users = User::findOrFail($id);
+        // dd($users);
+        return view('user_profile', compact('users'));
+
+    }
+    public function userComments($id){
+        $users = User::findOrFail($id);
+        return view('user_comments', compact('users'));
     }
 }

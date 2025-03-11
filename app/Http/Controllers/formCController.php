@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\Customer;
-
+use App\Mail\UserCreatedMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 
 class formCController extends Controller
@@ -32,6 +33,16 @@ class formCController extends Controller
         $customer->address2 = $request->get('add1');
         // dd($customer);
         $customer->save();
+        $customer->refresh();
+
+        /* mail sending */
+        /* ---------------------------- */
+        // Mail::to('kesu@kk.com')->send(new UserCreatedMail($customer));
+        Mail::to($customer->email)
+        ->cc('abc@mail.com')
+        ->bcc('xyz@mail.com')
+        ->send((new UserCreatedMail($customer))->subject('Welcome to Our Service!'));
+        
         session()->forget('username'); /**like this we can remove/delete value from session */
         session()->flush(); /**like this we can remove/delete all values from session */
 
@@ -49,7 +60,7 @@ class formCController extends Controller
         $edit = true;
         return view('customer.sign_in',compact('customer','edit'));
 
-        /**** below code showing checking of ser login without using middleware *****/ 
+        /**** below code showing checking of user login without using middleware *****/ 
 
         // if(Auth()->check()){
         //     $customer = Customer::find($id);
